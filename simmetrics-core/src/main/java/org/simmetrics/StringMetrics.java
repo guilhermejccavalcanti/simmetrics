@@ -18,38 +18,39 @@
  * #L%
  */
 
-package org.simmetrics;
+package org.simmetrics; 
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static org.simmetrics.simplifiers.Simplifiers.chain;
-import static org.simmetrics.tokenizers.Tokenizers.chain;
-import static org.simmetrics.tokenizers.Tokenizers.qGram;
-import static org.simmetrics.tokenizers.Tokenizers.whitespace;
+import static com.google.common.base.Preconditions.checkArgument; 
+ 
+import static org.simmetrics.simplifiers.Simplifiers.chain; 
+import static org.simmetrics.tokenizers.Tokenizers.chain; 
+import static org.simmetrics.tokenizers.Tokenizers.qGram; 
+import static org.simmetrics.tokenizers.Tokenizers.whitespace; 
 
-import java.util.List;
-import java.util.Set;
+import java.util.List; 
+import java.util.Set; 
 
-import org.simmetrics.metrics.BlockDistance;
-import org.simmetrics.metrics.CosineSimilarity;
-import org.simmetrics.metrics.DamerauLevenshtein;
-import org.simmetrics.metrics.DiceSimilarity;
-import org.simmetrics.metrics.EuclideanDistance;
-import org.simmetrics.metrics.Identity;
-import org.simmetrics.metrics.JaccardSimilarity;
-import org.simmetrics.metrics.Jaro;
-import org.simmetrics.metrics.JaroWinkler;
-import org.simmetrics.metrics.Levenshtein;
-import org.simmetrics.metrics.MatchingCoefficient;
-import org.simmetrics.metrics.MongeElkan;
-import org.simmetrics.metrics.NeedlemanWunch;
-import org.simmetrics.metrics.OverlapCoefficient;
-import org.simmetrics.metrics.SimonWhite;
-import org.simmetrics.metrics.SmithWaterman;
-import org.simmetrics.metrics.SmithWatermanGotoh;
-import org.simmetrics.simplifiers.Simplifier;
-import org.simmetrics.simplifiers.Soundex;
-import org.simmetrics.tokenizers.Tokenizer;
-import org.simmetrics.tokenizers.Tokenizers;
+import org.simmetrics.metrics.BlockDistance; 
+import org.simmetrics.metrics.CosineSimilarity; 
+import org.simmetrics.metrics.DamerauLevenshtein; 
+import org.simmetrics.metrics.DiceSimilarity; 
+import org.simmetrics.metrics.EuclideanDistance; 
+import org.simmetrics.metrics.Identity; 
+import org.simmetrics.metrics.JaccardSimilarity; 
+import org.simmetrics.metrics.Jaro; 
+import org.simmetrics.metrics.JaroWinkler; 
+import org.simmetrics.metrics.Levenshtein; 
+import org.simmetrics.metrics.MatchingCoefficient; 
+import org.simmetrics.metrics.MongeElkan; 
+import org.simmetrics.metrics.NeedlemanWunch; 
+import org.simmetrics.metrics.OverlapCoefficient; 
+import org.simmetrics.metrics.SimonWhite; 
+import org.simmetrics.metrics.SmithWaterman; 
+import org.simmetrics.metrics.SmithWatermanGotoh; 
+import org.simmetrics.simplifiers.Simplifier; 
+import org.simmetrics.simplifiers.Soundex; 
+import org.simmetrics.tokenizers.Tokenizer; 
+import org.simmetrics.tokenizers.Tokenizers; 
 
 /**
  * Utility class for StringMetrics.
@@ -85,7 +86,163 @@ import org.simmetrics.tokenizers.Tokenizers;
  * All methods return immutable objects provided the arguments are also
  * immutable.
  */
-public final class StringMetrics {
+public final  class  StringMetrics {
+	
+
+	    ForList   {
+		
+		
+		
+		
+		
+
+		
+		
+
+		
+		
+
+		
+		
+
+		
+		
+
+		
+
+	}
+	
+
+	    ForListWithSimplifier   {
+		
+		
+		
+		
+		
+		
+		
+
+		
+		
+
+		
+		
+
+		
+		
+
+		
+		
+
+		
+		
+
+		
+
+	}
+	
+
+	    ForSet   {
+		
+
+		
+		
+		
+		
+
+		
+		
+
+		
+		
+
+		
+		
+
+		
+		
+
+		
+
+	}
+	
+
+	    ForSetWithSimplifier   {
+		
+
+		
+		
+		
+		
+		
+		
+
+		
+		
+
+		
+		
+
+		
+		
+
+		
+		
+
+		
+		
+
+		
+
+	}
+	
+
+	    ForString   {
+		
+		
+		
+
+		
+		
+		
+		Metric<String> getMetric() {
+			return metric;
+		}
+		
+
+		
+		
+		
+		
+
+	}
+	
+
+	    ForStringWithSimplifier   {
+		
+
+		
+		
+
+		
+		
+
+		
+		
+
+		
+		
+
+		
+		
+
+		
+		
+
+		
+
+	}
+	
 
 	/**
 	 * Applies a metric to a string c and a list of strings. Returns an array
@@ -117,6 +274,7 @@ public final class StringMetrics {
 		return results;
 
 	}
+	
 
 	/**
 	 * Applies a metric to a string c and a list of strings. Returns an array
@@ -145,6 +303,7 @@ public final class StringMetrics {
 
 		return results;
 	}
+	
 
 	/**
 	 * Applies a metric to each pair of a[n] and b[n]. Returns an array where
@@ -173,6 +332,7 @@ public final class StringMetrics {
 		}
 		return results;
 	}
+	
 
 	/**
 	 * Returns a string metric that uses a {@link Tokenizers#whitespace()} and
@@ -183,6 +343,7 @@ public final class StringMetrics {
 	public static StringMetric cosineSimilarity() {
 		return createForSetMetric(new CosineSimilarity<String>(), whitespace());
 	}
+	
 
 	/**
 	 * Either constructs a new string metric or returns the original metric.
@@ -199,6 +360,7 @@ public final class StringMetrics {
 
 		return new ForString(metric);
 	}
+	
 
 	/**
 	 * Constructs a new composite string metric. The simplifier will be applied
@@ -217,7 +379,11 @@ public final class StringMetrics {
 	 */
 	public static StringMetric create(Metric<String> metric,
 			Simplifier simplifier) {
-		if (metric instanceof ForStringWithSimplifier) {
+		if (metric instanceof ForString) {
+			ForString forString = (ForString) metric;
+			return new ForStringWithSimplifier(forString.getMetric(),
+					simplifier);
+		} else if (metric instanceof ForStringWithSimplifier) {
 			ForStringWithSimplifier fsws = (ForStringWithSimplifier) metric;
 			return new ForStringWithSimplifier(fsws.getMetric(), chain(
 					simplifier, fsws.getSimplifier()));
@@ -237,10 +403,11 @@ public final class StringMetrics {
 			ForSetWithSimplifier fl = (ForSetWithSimplifier) metric;
 			return createForSetMetric(fl.getMetric(),
 					chain(simplifier, fl.getSimplifier()), fl.getTokenizer());
-		}
-
+		} 
+		
 		return new ForStringWithSimplifier(metric, simplifier);
 	}
+	
 
 	/**
 	 * Creates a new composite string metric.The tokenizer is used to tokenize
@@ -263,6 +430,7 @@ public final class StringMetrics {
 			Simplifier simplifier, Tokenizer tokenizer) {
 		return new ForListWithSimplifier(metric, simplifier, tokenizer);
 	}
+	
 
 	/**
 	 * Creates a new composite string metric. The tokenizer is used to tokenize
@@ -283,6 +451,7 @@ public final class StringMetrics {
 			Tokenizer tokenizer) {
 		return new ForList(metric, tokenizer);
 	}
+	
 
 	/**
 	 * Creates a new composite string metric.The tokenizer is used to tokenize
@@ -305,6 +474,7 @@ public final class StringMetrics {
 			Simplifier simplifier, Tokenizer tokenizer) {
 		return new ForSetWithSimplifier(metric, simplifier, tokenizer);
 	}
+	
 
 	/**
 	 * Creates a new composite string metric. The tokenizer is used to tokenize
@@ -326,6 +496,7 @@ public final class StringMetrics {
 			Tokenizer tokenizer) {
 		return new ForSet(metric, tokenizer);
 	}
+	
 
 	/**
 	 * Returns a string metric that uses a {@link Tokenizers#whitespace()} and
@@ -336,6 +507,7 @@ public final class StringMetrics {
 	public static StringMetric blockDistance() {
 		return createForListMetric(new BlockDistance<String>(), whitespace());
 	}
+	
 
 	/**
 	 * Returns a string metric that uses a {@link DamerauLevenshtein} metric.
@@ -345,6 +517,7 @@ public final class StringMetrics {
 	public static StringMetric damerauLevenshtein() {
 		return new DamerauLevenshtein();
 	}
+	
 
 	/**
 	 * Returns a string metric that uses a {@link Tokenizers#whitespace()} and
@@ -355,6 +528,7 @@ public final class StringMetrics {
 	public static StringMetric diceSimilarity() {
 		return createForSetMetric(new DiceSimilarity<String>(), whitespace());
 	}
+	
 
 	/**
 	 * Returns a string metric that uses a {@link Tokenizers#whitespace()} and
@@ -367,6 +541,7 @@ public final class StringMetrics {
 				whitespace());
 	}
 	
+	
 	/**
 	 * Returns an string metric that uses the {@link Identity} metric.
 	 * 
@@ -375,6 +550,7 @@ public final class StringMetrics {
 	public static StringMetric identity(){
 		return create(new Identity<String>());
 	}
+	
 
 	/**
 	 * Returns a string metric that uses a {@link Tokenizers#whitespace()} and
@@ -385,6 +561,7 @@ public final class StringMetrics {
 	public static StringMetric jaccardSimilarity() {
 		return createForSetMetric(new JaccardSimilarity<String>(), whitespace());
 	}
+	
 
 	/**
 	 * Returns a string metric that uses the {@link Jaro} metric.
@@ -394,6 +571,7 @@ public final class StringMetrics {
 	public static StringMetric jaro() {
 		return new Jaro();
 	}
+	
 
 	/**
 	 * Returns a string metric that uses the {@link JaroWinkler} metric.
@@ -403,6 +581,7 @@ public final class StringMetrics {
 	public static StringMetric jaroWinkler() {
 		return new JaroWinkler();
 	}
+	
 
 	/**
 	 * Returns a string metric that uses the {@link Levenshtein} metric.
@@ -412,6 +591,7 @@ public final class StringMetrics {
 	public static StringMetric levenshtein() {
 		return new Levenshtein();
 	}
+	
 
 	/**
 	 * Returns a string metric that uses a {@link Tokenizers#whitespace()} and
@@ -423,6 +603,7 @@ public final class StringMetrics {
 		return createForListMetric(new MatchingCoefficient<String>(),
 				whitespace());
 	}
+	
 
 	/**
 	 * Returns a string metric that uses a {@link Tokenizers#whitespace()} and
@@ -435,6 +616,7 @@ public final class StringMetrics {
 		return createForListMetric(new MongeElkan(new SmithWatermanGotoh()),
 				whitespace());
 	}
+	
 
 	/**
 	 * Returns a string metric that uses the {@link NeedlemanWunch} metric.
@@ -444,6 +626,7 @@ public final class StringMetrics {
 	public static StringMetric needlemanWunch() {
 		return new NeedlemanWunch();
 	}
+	
 
 	/**
 	 * Returns a string metric that uses a {@link Tokenizers#whitespace()} and
@@ -455,6 +638,7 @@ public final class StringMetrics {
 		return createForSetMetric(new OverlapCoefficient<String>(),
 				whitespace());
 	}
+	
 
 	/**
 	 * Returns a string metric that uses a
@@ -467,6 +651,7 @@ public final class StringMetrics {
 		return createForListMetric(new BlockDistance<String>(),
 				Tokenizers.qGramWithPadding(3));
 	}
+	
 
 	/**
 	 * Returns a string metric that uses a {@link Tokenizers#whitespace()}
@@ -479,6 +664,7 @@ public final class StringMetrics {
 		return createForListMetric(new SimonWhite<String>(),
 				chain(whitespace(), qGram(2)));
 	}
+	
 
 	/**
 	 * Returns a string metric that uses the {@link SmithWaterman} metric.
@@ -488,6 +674,7 @@ public final class StringMetrics {
 	public static StringMetric smithWaterman() {
 		return new SmithWaterman();
 	}
+	
 
 	/**
 	 * Returns a string metric that uses the {@link SmithWatermanGotoh} metric.
@@ -497,6 +684,7 @@ public final class StringMetrics {
 	public static StringMetric smithWatermanGotoh() {
 		return new SmithWatermanGotoh();
 	}
+	
 
 	/**
 	 * Returns a string metric that uses a {@link Soundex} and
@@ -507,6 +695,7 @@ public final class StringMetrics {
 	public static StringMetric soundex() {
 		return create(new JaroWinkler(), new Soundex());
 	}
+	
 
 	private StringMetrics() {
 		// Utility class.
